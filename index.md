@@ -7,8 +7,8 @@
 - https://www.qtpyvcp.com/install/quick_start.html
 - https://github.com/LinuxCNC/mesaflash
 - https://forum.linuxcnc.org/27-driver-boards/35820-7i96-7i85s
-- http://freeby.mesanet.com/7i96_7i85.zip
-- http://freeby.mesanet.com/7i96_7i85s.zip
+- [Bitfile for 7i96 + 7i85](http://freeby.mesanet.com/7i96_7i85.zip)
+- [Bitfile for 7i96 + 7i85s](http://freeby.mesanet.com/7i96_7i85s.zip)
 
 ## Debian
 
