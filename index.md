@@ -113,7 +113,7 @@ Now install the tool itself with `pip3 install git+https://github.com/jethornton
 
 The tool can be started with the command `7i96`
 
-**!! [](https://github.com/jethornton/7i96/issues/9) !!**
+**!! https://github.com/jethornton/7i96/issues/9 !!**
 
 ```bash
 cp ~/.local/lib/python3.7/site-packages/m7i96/mesaflash64 ~/.local/bin
