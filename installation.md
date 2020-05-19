@@ -113,19 +113,9 @@ Now install the tool itself with `pip3 install git+https://github.com/jethornton
 
 The tool can be started with the command `7i96`
 
-**!! https://github.com/jethornton/7i96/issues/9 !!**
+To circumvent an open issue ([#9](https://github.com/jethornton/7i96/issues/9)) a symlink to rthe mesaflash64 binary that comes with the 7i96 tool is neccessary.
 
 ```bash
 cp ~/.local/lib/python3.7/site-packages/m7i96/mesaflash64 ~/.local/bin
 ln -s ~/.local/bin/mesaflash64 /usr/bin/mesaflash64`
 ```
-
-## Install mesaflash
-
-**!! This is not needed as mesaflash comes with the 7i96 tool !!**
-
-Install dependencies with `sudo apt install libpci-dev pkg-config` and go to you home directory with `cd ~`.
-
-Now clone the git repo with `git clone https://github.com/LinuxCNC/mesaflash.git`, afterwards cd into the new folder with `cd mesaflash`
-
-Finally build and install mesaflash with `sudo make install`
