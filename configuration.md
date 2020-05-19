@@ -2,5 +2,5 @@
 
 # Create basic config with the 7i96 tool
 
-Check out the installation section if not already done [7i96](installation.md#)
+Check out the installation section if not already done [7i96](installation.md#7i96-configuration-tool)
 
