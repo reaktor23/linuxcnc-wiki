@@ -117,5 +117,5 @@ To circumvent an open issue ([#9](https://github.com/jethornton/7i96/issues/9)) 
 
 ```bash
 cp ~/.local/lib/python3.7/site-packages/m7i96/mesaflash64 ~/.local/bin
-ln -s ~/.local/bin/mesaflash64 /usr/bin/mesaflash64`
+ln -s ~/.local/bin/mesaflash64 /usr/bin/mesaflash64
 ```
