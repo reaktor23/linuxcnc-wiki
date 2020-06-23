@@ -161,3 +161,5 @@ Do not forget to load the `handwheel.hal` in your .ini HAL section
 ```
 HALFILE             = handwheel.hal
 ```
+
+And adjust the path `/home/miller/linuxcnc/configs/millimcmillface/handwheel.py` according to the location of the `handwheel.py`on your machine 
