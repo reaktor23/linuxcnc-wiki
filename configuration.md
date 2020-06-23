@@ -1,4 +1,4 @@
-# Configurtation of the Mesa 7i96 and 7i85S
+# Configurtation of our CNC mill contolled by the Mesa 7i96 and 7i85S
 
 # Create basic config with the 7i96 tool
 
