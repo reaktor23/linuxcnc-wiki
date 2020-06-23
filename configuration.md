@@ -11,7 +11,7 @@ But be careful, a huge downside of the tool is that it might overwrite your sett
 
 In order to communicate with the spindle over serial, you need to add the user to the dialout group
 
-sudo adduser <username> dialout
+`sudo adduser <username> dialout`
   
 After that, you need to logout and login again to make it work.
 
