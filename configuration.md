@@ -42,3 +42,11 @@ Bus 002 Device 001: ID 1d6b:0002 Linux Foundation 2.0 root hub
 ```
 
 The `Bus 002 Device 010: ID 0403:6001 Future Technology Devices International, Ltd FT232 Serial (UART) IC` is our converter, after THE ID you see the two numbers you need.
+
+You need to reload udev with `sudo udevadm trigger` in order to load the rule.
+
+A `ls -la /dev/spindle0` should give you:
+
+```
+lrwxrwxrwx 1 root root 7 Jun 23 16:05 /dev/spindle0 -> ttyUSB1
+```
