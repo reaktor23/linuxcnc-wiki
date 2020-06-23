@@ -15,4 +15,30 @@ In order to communicate with the spindle over serial, you need to add the user t
   
 After that, you need to logout and login again to make it work.
 
+## udev rules
 
+In order to get a device for the spindle (`/de/spindle0`) you can create a custom udev rule.
+To do so create a file named `99_mill.rules` in `/lib/udev/rules.d/`.
+In this file you put the following rule:
+
+```
+SUBSYSTEM=="tty", ATTRS{idVendor}=="0403", ATTRS{idProduct}=="6001", ATTRS{serial}=="00000000", SYMLINK+="spindle0"
+```
+
+You might have to adjust 0403 and 6001 to fit your USB/RS485 converter. To find the correct values, type `lsusb`.
+The output can look like that:
+
+```
+Bus 004 Device 002: ID 8087:8000 Intel Corp. 
+Bus 004 Device 001: ID 1d6b:0002 Linux Foundation 2.0 root hub
+Bus 001 Device 002: ID 8087:8008 Intel Corp. 
+Bus 001 Device 001: ID 1d6b:0002 Linux Foundation 2.0 root hub
+Bus 003 Device 001: ID 1d6b:0003 Linux Foundation 3.0 root hub
+Bus 002 Device 007: ID 1a86:7523 QinHeng Electronics HL-340 USB-Serial adapter
+Bus 002 Device 006: ID 046d:c52b Logitech, Inc. Unifying Receiver
+Bus 002 Device 009: ID 7392:7811 Edimax Technology Co., Ltd EW-7811Un 802.11n Wireless Adapter [Realtek RTL8188CUS]
+Bus 002 Device 010: ID 0403:6001 Future Technology Devices International, Ltd FT232 Serial (UART) IC
+Bus 002 Device 001: ID 1d6b:0002 Linux Foundation 2.0 root hub
+```
+
+The `Bus 002 Device 010: ID 0403:6001 Future Technology Devices International, Ltd FT232 Serial (UART) IC` is our converter, after THE ID you see the two numbers you need.
