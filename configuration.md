@@ -15,6 +15,65 @@ In order to communicate with the spindle over serial, you need to add the user t
   
 After that, you need to logout and login again to make it work.
 
+## HAL settings
+
+Add these lines to your .hal file (or into a seperate one and import it)
+
+```
+# ==============================================================================
+# Spindle
+# ==============================================================================
+
+# Load the Huanyang VFD user component
+loadusr -Wn spindle-vfd hy_vfd -n spindle-vfd -t 1 -d /dev/spindle0 -p none -r 38400 -s 1
+
+# Spindle signales via serial connection
+setp spindle-vfd.enable 1
+net spindle-fwd spindle.0.forward => spindle-vfd.spindle-forward
+net spindle-reverse spindle.0.reverse => spindle-vfd.spindle-reverse
+net spindle-speed-cmd  spindle.0.speed-out-abs => spindle-vfd.speed-command
+net spindle-on spindle.0.on => spindle-vfd.spindle-on
+net spindle-at-speed spindle.0.at-speed => spindle-vfd.spindle-at-speed
+
+setp pid.3.Pgain       [SPINDLE]P
+setp pid.3.Igain       [SPINDLE]I
+setp pid.3.Dgain       [SPINDLE]D
+setp pid.3.bias        [SPINDLE]BIAS
+setp pid.3.FF0         [SPINDLE]FF0
+setp pid.3.FF1         [SPINDLE]FF1
+setp pid.3.FF2         [SPINDLE]FF2
+setp pid.3.deadband    [SPINDLE]DEADBAND
+setp pid.3.maxoutput   [SPINDLE]MAX_OUTPUT
+setp pid.3.maxerror    [SPINDLE]MAX_ERROR
+```
+
+Make sure `loadrt pid num_chan=4` is set to 4 or more in order to have a PID for the spindle.
+
+### INI settings
+
+Add these lines to your .ini
+```
+# ==============================================================================
+# Parameters for the Spindle
+# ==============================================================================
+
+[SPINDLE]
+SPINDLE_TYPE = openLoop
+DEADBAND     = 0
+P            = 50
+I            = 200
+D            = .2
+FF0          = 0
+FF1          = 0
+FF2          = 0
+BIAS         = 0
+MAX_OUTPUT   = 0
+MAX_ERROR    = 50
+SCALE        = 6000
+MINLIM       = 0
+MAXLIM       = 6000
+```
+
 ### udev rules
 
 In order to get a device for the spindle (`/de/spindle0`) you can create a custom udev rule.
