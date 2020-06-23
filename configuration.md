@@ -109,3 +109,55 @@ A `ls -la /dev/spindle0` should give you:
 ```
 lrwxrwxrwx 1 root root 7 Jun 23 16:05 /dev/spindle0 -> ttyUSB1
 ```
+
+## Arduino Handwheel
+
+### udev rules
+
+As with the VFD, creating a udev rule is recommended, to do so add this to 99_mill.rules
+
+```
+SUBSYSTEM=="tty", ATTRS{idVendor}=="1a86", ATTRS{idProduct}=="7523", SYMLINK+="handwheel0" 
+```
+
+### HAL settings
+
+Add these lines to a handwheel.hal (or put them into your main hal file)
+
+```
+# Load handwheel python component
+loadusr -Wn handwheel /home/miller/linuxcnc/configs/millimcmillface/handwheel.py
+
+# For velocity mode, set to 1
+# In velocity mode the axis stops when the dial is stopped
+# even if that means the commanded motion is not completed,
+# For position mode (the default), set to 0
+# In position mode the axis will move exactly jog-scale
+# units for each count, regardless of how long that might take,
+setp axis.x.jog-vel-mode 1
+setp axis.y.jog-vel-mode 1
+setp axis.z.jog-vel-mode 1
+
+# The handwheel scale selection
+net handwheel-scale <= handwheel.scale
+net handwheel-scale => axis.x.jog-scale 
+net handwheel-scale => axis.y.jog-scale 
+net handwheel-scale => axis.z.jog-scale
+
+# # The Axis select inputs
+net handwheel-enable-x handwheel.enable-x axis.x.jog-enable
+net handwheel-enable-y handwheel.enable-y axis.y.jog-enable
+net handwheel-enable-z handwheel.enable-z axis.z.jog-enable
+#
+# # The encoder output counts to the axis. Only the selected axis will move.
+net handwheel-counts <= handwheel.encoder
+net handwheel-counts => axis.x.jog-counts
+net handwheel-counts => axis.y.jog-counts
+net handwheel-counts => axis.z.jog-counts
+```
+
+Do not forget to load the `handwheel.hal` in your .ini HAL section
+
+```
+HALFILE             = handwheel.hal
+```
